@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Stale Tab Cleaner</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>Stale Tabs</h1>
+    <button id="settingsBtn" title="Settings" class="icon-btn">⚙</button>
+  </header>
+
+  <div id="summary" class="summary"></div>
+
+  <div id="emptyState" class="empty-state" hidden>
+    <p>🎉 No stale tabs right now.</p>
+  </div>
+
+  <div id="bulkBar" class="bulk-bar" hidden>
+    <label class="select-all">
+      <input type="checkbox" id="selectAll" />
+      Select all
+    </label>
+    <div class="bulk-actions">
+      <button id="bulkStillUsing" class="btn btn-secondary">Still using</button>
+      <button id="bulkSnooze" class="btn btn-secondary">Snooze 1h</button>
+      <button id="bulkClose" class="btn btn-danger">Close selected</button>
+    </div>
+  </div>
+
+  <ul id="tabList" class="tab-list"></ul>
+
+  <template id="tabRowTemplate">
+    <li class="tab-row">
+      <input type="checkbox" class="row-check" />
+      <img class="favicon" src="" alt="" />
+      <div class="tab-info">
+        <div class="tab-title"></div>
+        <div class="tab-meta"></div>
+      </div>
+      <div class="row-actions">
+        <button class="row-btn still-using" title="Still using this">Still using</button>
+        <button class="row-btn close-tab" title="Close this tab">Close</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Stale Tab Cleaner — Settings</title>
+  <style>
+    :root {
+      --paper: #FAF8F4;
+      --ink: #2B2A28;
+      --ink-soft: #6B6863;
+      --line: #E4E0D8;
+      --amber: #B8763E;
+    }
+    body {
+      font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      max-width: 440px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 { font-size: 18px; }
+    .field {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+    .hint {
+      color: var(--ink-soft);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    input[type="number"] {
+      width: 100px;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .checkbox-field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .checkbox-field label { margin: 0; font-weight: 500; }
+    button {
+      background: var(--amber);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    #savedMsg {
+      color: #4C7A5D;
+      font-size: 12px;
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stale Tab Cleaner — Settings</h1>
+
+  <div class="field">
+    <label for="threshold">Flag tabs open longer than (minutes)</label>
+    <input type="number" id="threshold" min="5" step="5" />
+    <div class="hint">Tabs open longer than this will show up for review.</div>
+  </div>
+
+  <div class="field">
+    <label for="interval">Check every (minutes)</label>
+    <input type="number" id="interval" min="5" step="5" />
+    <div class="hint">How often the extension scans your tabs in the background.</div>
+  </div>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" id="notifyEnabled" />
+    <label for="notifyEnabled">Show a notification when stale tabs are found</label>
+  </div>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" id="ignorePinned" />
+    <label for="ignorePinned">Ignore pinned tabs</label>
+  </div>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" id="ignoreAudible" />
+    <label for="ignoreAudible">Ignore tabs currently playing audio/video</label>
+  </div>
+
+  <button id="saveBtn">Save changes</button>
+  <span id="savedMsg">Saved</span>
+
+  <script src="options.js"></script>
+</body>
+</html>
