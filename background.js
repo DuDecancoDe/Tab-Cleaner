@@ -10,8 +10,8 @@ const DEFAULTS = {
 
 const STORAGE_KEYS = {
   settings: "settings",
-  tabOpenedAt: "tabOpenedAt", // { [tabId]: timestamp }
-  snoozed: "snoozed"          // { [tabId]: timestampUntilWhichToIgnore }
+  tabOpenedAt: "tabOpenedAt", 
+  snoozed: "snoozed"          
 };
 
 // ---------- Setup ----------
@@ -52,7 +52,7 @@ async function scheduleAlarm() {
   chrome.alarms.create("staleTabCheck", { periodInMinutes: interval });
 }
 
-// ---------- Track tab lifecycle ----------
+
 
 chrome.tabs.onCreated.addListener(async (tab) => {
   const { tabOpenedAt = {} } = await chrome.storage.local.get(STORAGE_KEYS.tabOpenedAt);
@@ -75,14 +75,9 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
 // only reset the clock on a real top-level navigation (not every SPA route change).
 chrome.webNavigation?.onCommitted?.addListener((details) => {
   if (details.frameId !== 0) return;
-  // We don't reset on every navigation (that would hide genuinely idle tabs
-  // that keep auto-refreshing). Activity is instead tracked via onActivated.
+
 });
 
-// If the user actively switches to / interacts with a tab, treat it as "used"
-// but do NOT reset its age — activity resets should only happen when the user
-// explicitly says "yes I'm still using this" in the prompt, so genuinely
-// forgotten tabs still get flagged even if Chrome briefly focuses them.
 
 // ---------- Alarm: scan for stale tabs ----------
 
@@ -169,7 +164,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
   if (message.type === "MARK_STILL_USING") {
-    // "Yes I'm still using this" -> reset the clock and clear snooze
+  //reset clock
     resetTabTimers(message.tabIds).then(() => {
       checkForStaleTabs();
       sendResponse({ ok: true });
